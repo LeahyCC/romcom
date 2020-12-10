@@ -5,10 +5,13 @@ var coverTitle = document.querySelector(".cover-title");
 var coverDescriptor1 = document.querySelector(".tagline-1");
 var coverDescriptor2 = document.querySelector(".tagline-2");
 var randomButton = document.querySelector(".random-cover-button");
-var makeYourOwnCover = document.querySelector(".make-new-button");
-var homeButton = document.querySelector(".home-button");
+var makeYourOwnCoverButton = document.querySelector(".make-new-button");
 var homeView = document.querySelector(".home-view");
 var formView = document.querySelector(".form-view");
+var homeButton = document.querySelector(".home-button");
+var viewSavedCoversButton = document.querySelector(".view-saved-button");
+var makeMyBookButton = document.querySelector(".create-new-book-button");
+
 
 
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,7 +27,7 @@ window.addEventListener("load", displayCover);
 
 randomButton.addEventListener('click', displayCover);
 
-makeYourOwnCover.addEventListener('click', displayFormView)
+makeYourOwnCoverButton.addEventListener('click', createCoverPage)
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -47,25 +50,59 @@ function displayCover() {
   coverDescriptor2.innerText = currentCover.tagline2;
 }
 
-function displayFormView() {
-  showFormView();
-  hideHomeView();
-  showHomeButton();
-  hideRandomButton();
+// function displayFormView() {
+//   showFormView();
+//   hideHomeView();
+//   showHomeButton();
+//   hideRandomButton();
+// }
+//
+// function showFormView() {
+//   formView.classList.remove("hidden");
+// }
+//
+// function hideHomeView() {
+//   homeView.classList.add("hidden");
+// }
+//
+// function showHomeButton() {
+//   homeButton.classList.remove("hidden");
+// }
+//
+// function hideRandomButton() {
+//   randomButton.classList.add("hidden");
+// }
+//
+
+
+function addHidden(element) {
+  element.classList.add("hidden");
+};
+
+function removeHidden(elementTwo) {
+  elementTwo.classList.remove("hidden")
 }
 
-function showFormView() {
-  formView.classList.remove("hidden");
+function createCoverPage(){
+  addHidden(homeView);
+  addHidden(randomButton);
+  addHidden(viewSavedCoversButton);
+  removeHidden(homeButton);
+  removeHidden(formView );
 }
 
-function hideHomeView() {
-  homeView.classList.add("hidden");
-}
+// function handlerChangeHiddenStatus() {
+//   changeHiddenStatus(homeView, formView);
+// }
+//
+// function displayFormView() {
+//   showHide(homeView, formView)
+// }
 
-function showHomeButton() {
-  homeButton.classList.remove("hidden");
-}
 
-function hideRandomButton() {
-  randomButton.classList.add("hidden");
-}
+
+
+
+// function showHideForm(domElement) {
+//   domElement.classList.toggle('hidden');
+// }
