@@ -28,8 +28,17 @@ function generateRandomCover() {
     currentCover.title = titles[getRandomIndex(titles)];
     currentCover.descriptor1 = descriptors[getRandomIndex(descriptors)];
     currentCover.descriptor2 = descriptors[getRandomIndex(descriptors)];
-  console.log(currentCover);
 }
+
+// function displayCover() {
+// document.getElementById innerHTML
+// }
+
+// title.innerText = currentCover.title
+// descriptor1.innertext = currentCover.descriptor1
+// descriptor2.innertext = currentCover.descriptor2
+
+//It looks like we might need to change the html element for our photo? Need to double check the code :)
 
 // function generateTagline(descriptor1, descriptor2) {
 // `A tale of ${descriptor1} and ${descriptor2}`
