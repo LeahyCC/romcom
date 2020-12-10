@@ -4,6 +4,12 @@ var coverTitle = document.querySelector(".cover-title");
 // var tagline = document.querySelector(".tagline");
 var coverDescriptor1 = document.querySelector(".tagline-1");
 var coverDescriptor2 = document.querySelector(".tagline-2");
+var randomButton = document.querySelector(".random-cover-button");
+var makeYourOwnCover = document.querySelector(".make-new-button");
+var homeButton = document.querySelector(".home-button");
+var homeView = document.querySelector(".home-view");
+var formView = document.querySelector(".form-view");
+
 
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -15,6 +21,10 @@ var currentCover;
 // ~~~~~~~~~~~~~~~~~ event listeners ~~~~~~~~~~~~~~~~~~~~~~~~
 
 window.addEventListener("load", displayCover);
+
+randomButton.addEventListener('click', displayCover);
+
+makeYourOwnCover.addEventListener('click', displayFormView)
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -35,4 +45,27 @@ function displayCover() {
   coverTitle.innerText = currentCover.title;
   coverDescriptor1.innerText = currentCover.tagline1;
   coverDescriptor2.innerText = currentCover.tagline2;
+}
+
+function displayFormView() {
+  showFormView();
+  hideHomeView();
+  showHomeButton();
+  hideRandomButton();
+}
+
+function showFormView() {
+  formView.classList.remove("hidden");
+}
+
+function hideHomeView() {
+  homeView.classList.add("hidden");
+}
+
+function showHomeButton() {
+  homeButton.classList.remove("hidden");
+}
+
+function hideRandomButton() {
+  randomButton.classList.add("hidden");
 }
