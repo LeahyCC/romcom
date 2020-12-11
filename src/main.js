@@ -79,3 +79,13 @@ function viewSavedCoversPage() {
   removeHidden(homeButton);
   removeHidden(savedView);
 }
+
+function viewHomePage() {
+  addHidden(formView);
+  addHidden(savedView);
+  addHidden(homeButton);
+  addHidden(makeMyBookButton);
+  removeHidden(homeView);
+  removeHidden(randomButton);
+  removeHidden(savedCoverButton);
+}
