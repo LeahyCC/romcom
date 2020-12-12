@@ -22,13 +22,15 @@ function clickHandler(event) {
   if (event.target.className === "make-new-button") {
     viewMakeYourOwnCoverPage();
   } else if (event.target.className === "view-saved-button") {
-    viewSavedCoversPage();
+    showSavedCovers();
   } else if (event.target.className === "home-button") {
     viewHomePage();
   } else if (event.target.className === "random-cover-button") {
     displayCover();
   } else if (event.target.className === "create-new-book-button") {
     returnNewBook(event);
+  } else if (event.target.className === "save-cover-button") {
+    saveCover(event);
   }
 }
 
@@ -41,7 +43,8 @@ function displayCover() {
 }
 
 function generateRandomCover() {
-    currentCover = new Cover(covers[getRandomIndex(covers)],
+    currentCover = new Cover(
+    covers[getRandomIndex(covers)],
     titles[getRandomIndex(titles)],
     descriptors[getRandomIndex(descriptors)],
     descriptors[getRandomIndex(descriptors)])
@@ -110,7 +113,7 @@ function storeInputsInArrays(coverInput, titleInput, descriptor1Input, descripto
 }
 
 function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
-  var newCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
+  currentCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
 
 function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
@@ -118,4 +121,25 @@ function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2In
   coverTitle.innerText = titleInput;
   coverDescriptor1.innerText = descriptor1Input;
   coverDescriptor2.innerText = descriptor2Input;
+}
+
+function saveCover() {
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover);
+  }
+}
+
+function showSavedCovers() {
+  viewSavedCoversPage();
+  var savedCoversSection = document.querySelector(".saved-covers-section");
+  savedCoversSection.innerHTML = '';
+  for (var i = 0; i < savedCovers.length; i++) {
+    savedCoversSection.innerHTML += `
+    <article class="mini-cover">
+      <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </article>
+    `
+  }
 }
