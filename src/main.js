@@ -1,22 +1,8 @@
 // ~~~~~~~~~~~~~~~~~ query selectors  ~~~~~~~~~~~~~~~~~~~~~~~~
 var coverImage = document.querySelector(".cover-image");
 var coverTitle = document.querySelector(".cover-title");
-// var tagline = document.querySelector(".tagline");
 var coverDescriptor1 = document.querySelector(".tagline-1");
 var coverDescriptor2 = document.querySelector(".tagline-2");
-var homeView = document.querySelector(".home-view");
-var formView = document.querySelector(".form-view");
-var savedView = document.querySelector(".saved-view");
-var homeButton = document.querySelector(".home-button");
-var randomButton = document.querySelector(".random-cover-button");
-var makeYourOwnCoverButton = document.querySelector(".make-new-button");
-var viewSavedCoversButton = document.querySelector(".view-saved-button");
-var makeMyBookButton = document.querySelector(".create-new-book-button");
-var savedCoverButton = document.querySelector(".save-cover-button");
-var coverInput = document.querySelector(".user-cover");
-var titleInput = document.querySelector(".user-title");
-var firstDescriptorInput = document.querySelector(".user-desc1");
-var secondDescriptorInput = document.querySelector(".user-desc2");
 
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -27,23 +13,23 @@ var currentCover;
 
 // ~~~~~~~~~~~~~~~~~ event listeners ~~~~~~~~~~~~~~~~~~~~~~~~
 
+window.addEventListener("click", clickHandler);
 window.addEventListener("load", displayCover);
-randomButton.addEventListener("click", displayCover);
-makeYourOwnCoverButton.addEventListener("click", viewMakeYourOwnCoverPage);
-viewSavedCoversButton.addEventListener("click", viewSavedCoversPage);
-homeButton.addEventListener("click", viewHomePage);
-makeMyBookButton.addEventListener("click", displayPersonalizedCover);
+
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
-}
-
-function generateRandomCover() {
-    currentCover = new Cover(covers[getRandomIndex(covers)],
-    titles[getRandomIndex(titles)],
-    descriptors[getRandomIndex(descriptors)],
-    descriptors[getRandomIndex(descriptors)])
+function clickHandler(event) {
+  if (event.target.className === "make-new-button") {
+    viewMakeYourOwnCoverPage();
+  } else if (event.target.className === "view-saved-button") {
+    viewSavedCoversPage();
+  } else if (event.target.className === "home-button") {
+    viewHomePage();
+  } else if (event.target.className === "random-cover-button") {
+    displayCover();
+  } else if (event.target.className === "create-new-book-button") {
+    returnNewBook(event);
+  }
 }
 
 function displayCover() {
@@ -54,60 +40,82 @@ function displayCover() {
   coverDescriptor2.innerText = currentCover.tagline2;
 }
 
-function addHidden(element) {
-  element.classList.add("hidden");
-};
+function generateRandomCover() {
+    currentCover = new Cover(covers[getRandomIndex(covers)],
+    titles[getRandomIndex(titles)],
+    descriptors[getRandomIndex(descriptors)],
+    descriptors[getRandomIndex(descriptors)])
+}
 
-function removeHidden(elementTwo) {
-  elementTwo.classList.remove("hidden")
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length);
+}
+
+function addHidden(className) {
+  document.querySelector(className).classList.add("hidden");
+}
+
+function removeHidden(className) {
+  document.querySelector(className).classList.remove("hidden");
 }
 
 function viewMakeYourOwnCoverPage(){
-  addHidden(homeView);
-  addHidden(savedView);
-  addHidden(randomButton);
-  addHidden(savedCoverButton);
-  removeHidden(makeMyBookButton);
-  removeHidden(viewSavedCoversButton)
-  removeHidden(homeButton);
-  removeHidden(formView);
+  addHidden(".home-view");
+  addHidden(".saved-view");
+  addHidden(".random-cover-button");
+  addHidden(".save-cover-button");
+  removeHidden(".create-new-book-button");
+  removeHidden(".view-saved-button")
+  removeHidden(".home-button");
+  removeHidden(".form-view");
 }
 
 function viewSavedCoversPage() {
-  addHidden(homeView);
-  addHidden(formView);
-  addHidden(randomButton);
-  addHidden(savedCoverButton);
-  addHidden(makeMyBookButton);
-  removeHidden(viewSavedCoversButton);
-  removeHidden(homeButton);
-  removeHidden(savedView);
+  addHidden(".home-view");
+  addHidden(".form-view");
+  addHidden(".random-cover-button");
+  addHidden(".save-cover-button");
+  addHidden(".create-new-book-button");
+  removeHidden(".view-saved-button");
+  removeHidden(".home-button");
+  removeHidden(".saved-view");
 }
 
 function viewHomePage() {
-  addHidden(formView);
-  addHidden(savedView);
-  addHidden(homeButton);
-  addHidden(makeMyBookButton);
-  removeHidden(homeView);
-  removeHidden(randomButton);
-  removeHidden(savedCoverButton);
+  addHidden(".form-view");
+  addHidden(".saved-view");
+  addHidden(".home-button");
+  addHidden(".create-new-book-button");
+  removeHidden(".home-view");
+  removeHidden(".random-cover-button");
+  removeHidden(".save-cover-button");
 }
 
-function generatePersonlaizedCover() {
-  coverImage.src = coverInput.value;
-  coverTitle.innerText = titleInput.value;
-  coverDescriptor1.innerText = firstDescriptorInput.value;
-  coverDescriptor2.innerText = secondDescriptorInput.value;
-  currentCover = new Cover(coverImage.src, coverTitle.innerText, coverDescriptor1.innerText, coverDescriptor2.innerText)
-}
-
-function displayPersonalizedCover() {
+function returnNewBook(event) {
   event.preventDefault();
-  generatePersonlaizedCover();
+  var coverInput = document.querySelector(".user-cover").value;
+  var titleInput = document.querySelector(".user-title").value;
+  var descriptor1Input = document.querySelector(".user-desc1").value;
+  var descriptor2Input = document.querySelector(".user-desc2").value;
+  storeInputsInArrays(coverInput, titleInput, descriptor1Input, descriptor2Input);
+  createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input);
+  displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input);
   viewHomePage();
-  covers.push(currentCover.cover);
-  titles.push(currentCover.title);
-  descriptors.push(currentCover.tagline1);
-  descriptors.push(currentCover.tagline2);
+}
+
+function storeInputsInArrays(coverInput, titleInput, descriptor1Input, descriptor2Input) {
+  covers.push(coverInput);
+  titles.push(titleInput);
+  descriptors.push(descriptor1Input, descriptor2Input);
+}
+
+function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
+  var newCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
+}
+
+function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
+  coverImage.src = coverInput;
+  coverTitle.innerText = titleInput;
+  coverDescriptor1.innerText = descriptor1Input;
+  coverDescriptor2.innerText = descriptor2Input;
 }
