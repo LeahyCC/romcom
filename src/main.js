@@ -22,13 +22,15 @@ function clickHandler(event) {
   if (event.target.className === "make-new-button") {
     viewMakeYourOwnCoverPage();
   } else if (event.target.className === "view-saved-button") {
-    viewSavedCoversPage();
+    showSavedCovers();
   } else if (event.target.className === "home-button") {
     viewHomePage();
   } else if (event.target.className === "random-cover-button") {
     displayCover();
   } else if (event.target.className === "create-new-book-button") {
     returnNewBook(event);
+  } else if (event.target.className === "save-cover-button") {
+    saveCover(event);
   }
 }
 
@@ -41,7 +43,8 @@ function displayCover() {
 }
 
 function generateRandomCover() {
-    currentCover = new Cover(covers[getRandomIndex(covers)],
+    currentCover = new Cover(
+    covers[getRandomIndex(covers)],
     titles[getRandomIndex(titles)],
     descriptors[getRandomIndex(descriptors)],
     descriptors[getRandomIndex(descriptors)])
@@ -110,7 +113,7 @@ function storeInputsInArrays(coverInput, titleInput, descriptor1Input, descripto
 }
 
 function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
-  var newCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
+  currentCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
 
 function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
@@ -118,4 +121,10 @@ function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2In
   coverTitle.innerText = titleInput;
   coverDescriptor1.innerText = descriptor1Input;
   coverDescriptor2.innerText = descriptor2Input;
+}
+
+function saveCover() {
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover);
+  }
 }
