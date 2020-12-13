@@ -40,7 +40,7 @@ If the user finds a cover that they would like to save, they can do so by clicki
 
 To delete a cover, the user simply has to double click on the cover they desire to be removed.
 
-![](https://media.giphy.com/media/eTjwaraiYYlrMf4zI7/giphy.gif )
+![](https://media.giphy.com/media/AUp19M7obHKdDYED3C/giphy.gif)
 
 A user can also create their own Rom Com cover, inputting their selected image, title, and descriptors
 
