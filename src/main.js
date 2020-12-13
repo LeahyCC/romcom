@@ -1,9 +1,3 @@
-// ~~~~~~~~~~~~~~~~~ query selectors  ~~~~~~~~~~~~~~~~~~~~~~~~
-var coverImage = document.querySelector(".cover-image");
-var coverTitle = document.querySelector(".cover-title");
-var coverDescriptor1 = document.querySelector(".tagline-1");
-var coverDescriptor2 = document.querySelector(".tagline-2");
-
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
 var savedCovers = [
@@ -14,7 +8,7 @@ var currentCover;
 // ~~~~~~~~~~~~~~~~~ event listeners ~~~~~~~~~~~~~~~~~~~~~~~~
 
 window.addEventListener("click", clickHandler);
-window.addEventListener("load", displayCover);
+window.addEventListener("load", displayRandomCover);
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -26,7 +20,7 @@ function clickHandler(event) {
   } else if (event.target.className === "home-button") {
     viewHomePage();
   } else if (event.target.className === "random-cover-button") {
-    displayCover();
+    displayRandomCover();
   } else if (event.target.className === "create-new-book-button") {
     returnNewBook(event);
   } else if (event.target.className === "save-cover-button") {
@@ -34,12 +28,20 @@ function clickHandler(event) {
   }
 }
 
-function displayCover() {
+function displayNewCover(cover, title, descriptor1, descriptor2) {
+  var coverImage = document.querySelector(".cover-image");
+  var coverTitle = document.querySelector(".cover-title");
+  var coverDescriptor1 = document.querySelector(".tagline-1");
+  var coverDescriptor2 = document.querySelector(".tagline-2");
+  coverImage.src = cover;
+  coverTitle.innerText = title;
+  coverDescriptor1.innerText = descriptor1;
+  coverDescriptor2.innerText = descriptor2;
+}
+
+function displayRandomCover() {
   generateRandomCover();
-  coverImage.src = currentCover.cover;
-  coverTitle.innerText = currentCover.title;
-  coverDescriptor1.innerText = currentCover.tagline1;
-  coverDescriptor2.innerText = currentCover.tagline2;
+  displayNewCover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2)
 }
 
 function generateRandomCover() {
@@ -116,11 +118,25 @@ function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Inp
   currentCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
 
-function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
-  coverImage.src = coverInput;
-  coverTitle.innerText = titleInput;
-  coverDescriptor1.innerText = descriptor1Input;
-  coverDescriptor2.innerText = descriptor2Input;
+function saveCover() {
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover);
+  }
+}
+
+function showSavedCovers() {
+  viewSavedCoversPage();
+  var savedCoversSection = document.querySelector(".saved-covers-section");
+  savedCoversSection.innerHTML = '';
+  for (var i = 0; i < savedCovers.length; i++) {
+    savedCoversSection.innerHTML += `
+    <article class="mini-cover">
+      <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </article>
+    `
+  }
 }
 
 function saveCover() {
