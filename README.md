@@ -44,7 +44,7 @@ To delete a cover, the user simply has to double click on the cover they desire 
 
 A user can also create their own Rom Com cover, inputting their selected image, title, and descriptors
 
-![](https://upload.wikimedia.org/wikipedia/commons/6/66/An_up-close_picture_of_a_curious_male_domestic_shorthair_tabby_cat.jpg)
+![](https://media.giphy.com/media/Q99ZMt0Teg8JM5Ic2p/giphy.gif)
 
 
 ## Future Additions
