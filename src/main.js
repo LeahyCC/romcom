@@ -1,9 +1,3 @@
-// ~~~~~~~~~~~~~~~~~ query selectors  ~~~~~~~~~~~~~~~~~~~~~~~~
-// var coverImage = document.querySelector(".cover-image");
-// var coverTitle = document.querySelector(".cover-title");
-// var coverDescriptor1 = document.querySelector(".tagline-1");
-// var coverDescriptor2 = document.querySelector(".tagline-2");
-
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
 var savedCovers = [
