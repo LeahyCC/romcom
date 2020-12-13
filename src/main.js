@@ -9,6 +9,7 @@ var currentCover;
 
 window.addEventListener("click", clickHandler);
 window.addEventListener("load", displayRandomCover);
+window.addEventListener("dblclick", deleteCover);
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -130,7 +131,7 @@ function showSavedCovers() {
   savedCoversSection.innerHTML = '';
   for (var i = 0; i < savedCovers.length; i++) {
     savedCoversSection.innerHTML += `
-    <article class="mini-cover">
+    <article class="mini-cover" id=${savedCovers[i].id}>
       <img class="cover-image" src=${savedCovers[i].cover}>
       <h2 class="cover-title">${savedCovers[i].title}</h2>
       <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
@@ -139,23 +140,14 @@ function showSavedCovers() {
   }
 }
 
-function saveCover() {
-  if (!savedCovers.includes(currentCover)) {
-    savedCovers.push(currentCover);
-  }
-}
-
-function showSavedCovers() {
-  viewSavedCoversPage();
-  var savedCoversSection = document.querySelector(".saved-covers-section");
-  savedCoversSection.innerHTML = '';
-  for (var i = 0; i < savedCovers.length; i++) {
-    savedCoversSection.innerHTML += `
-    <article class="mini-cover">
-      <img class="cover-image" src=${savedCovers[i].cover}>
-      <h2 class="cover-title">${savedCovers[i].title}</h2>
-      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-    </article>
-    `
+function deleteCover(event) {
+  if (event.target.closest("article")){
+    var parentID = event.target.closest("article").id;
+    for (var i = 0; i < savedCovers.length; i++) {
+      if (savedCovers[i].id === +parentID) {
+        savedCovers.splice([i], 1);
+      }
+    }
+    showSavedCovers();
   }
 }
