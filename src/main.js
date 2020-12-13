@@ -1,8 +1,8 @@
 // ~~~~~~~~~~~~~~~~~ query selectors  ~~~~~~~~~~~~~~~~~~~~~~~~
-var coverImage = document.querySelector(".cover-image");
-var coverTitle = document.querySelector(".cover-title");
-var coverDescriptor1 = document.querySelector(".tagline-1");
-var coverDescriptor2 = document.querySelector(".tagline-2");
+// var coverImage = document.querySelector(".cover-image");
+// var coverTitle = document.querySelector(".cover-title");
+// var coverDescriptor1 = document.querySelector(".tagline-1");
+// var coverDescriptor2 = document.querySelector(".tagline-2");
 
 // ~~~~~~~~~~~~~~~~~ global variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -14,7 +14,7 @@ var currentCover;
 // ~~~~~~~~~~~~~~~~~ event listeners ~~~~~~~~~~~~~~~~~~~~~~~~
 
 window.addEventListener("click", clickHandler);
-window.addEventListener("load", displayCover);
+window.addEventListener("load", displayRandomCover);
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -26,7 +26,7 @@ function clickHandler(event) {
   } else if (event.target.className === "home-button") {
     viewHomePage();
   } else if (event.target.className === "random-cover-button") {
-    displayCover();
+    displayRandomCover();
   } else if (event.target.className === "create-new-book-button") {
     returnNewBook(event);
   } else if (event.target.className === "save-cover-button") {
@@ -34,12 +34,21 @@ function clickHandler(event) {
   }
 }
 
-function displayCover() {
+// function createCoverHandler() {
+//   var coverImage = document.querySelector(".cover-image");
+//   var coverTitle = document.querySelector(".cover-title");
+//   var coverDescriptor1 = document.querySelector(".tagline-1");
+//   var coverDescriptor2 = document.querySelector(".tagline-2");
+//   displayCover(coverImage, coverTitle, coverDescriptor1, coverDescriptor2);
+// }
+
+function displayRandomCover(coverImage, coverTitle, coverDescriptor1, coverDescriptor2) {
   generateRandomCover();
-  coverImage.src = currentCover.cover;
-  coverTitle.innerText = currentCover.title;
-  coverDescriptor1.innerText = currentCover.tagline1;
-  coverDescriptor2.innerText = currentCover.tagline2;
+  displayNewCover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2)
+  // coverImage.src = currentCover.cover;
+  // coverTitle.innerText = currentCover.title;
+  // coverDescriptor1.innerText = currentCover.tagline1;
+  // coverDescriptor2.innerText = currentCover.tagline2;
 }
 
 function generateRandomCover() {
@@ -116,12 +125,32 @@ function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Inp
   currentCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
 
-function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
-  coverImage.src = coverInput;
-  coverTitle.innerText = titleInput;
-  coverDescriptor1.innerText = descriptor1Input;
-  coverDescriptor2.innerText = descriptor2Input;
+function displayNewCover(cover, title, descriptor1, descriptor2) {
+  var coverImage = document.querySelector(".cover-image");
+  var coverTitle = document.querySelector(".cover-title");
+  var coverDescriptor1 = document.querySelector(".tagline-1");
+  var coverDescriptor2 = document.querySelector(".tagline-2");
+  coverImage.src = cover;
+  coverTitle.innerText = title;
+  coverDescriptor1.innerText = descriptor1;
+  coverDescriptor2.innerText = descriptor2;
+  // coverImage.src = coverInput;
+  // coverTitle.innerText = titleInput;
+  // coverDescriptor1.innerText = descriptor1Input;
+  // coverDescriptor2.innerText = descriptor2Input;
+  // createCoverHandler(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
+
+// function createCoverHandler(newCover, newTitle, newDescriptor1, newDescriptor2) {
+//   var coverImage = document.querySelector(".cover-image");
+//   var coverTitle = document.querySelector(".cover-title");
+//   var coverDescriptor1 = document.querySelector(".tagline-1");
+//   var coverDescriptor2 = document.querySelector(".tagline-2");
+//   coverImage.src = newCover;
+//   coverTitle.innerText = newTitle;
+//   coverDescriptor1.innerText = newDescriptor1;
+//   coverDescriptor2.innerText = newDescriptor2;
+// }
 
 function saveCover() {
   if (!savedCovers.includes(currentCover)) {
