@@ -119,13 +119,6 @@ function createNewCover(coverInput, titleInput, descriptor1Input, descriptor2Inp
   currentCover = new Cover(coverInput, titleInput, descriptor1Input, descriptor2Input)
 }
 
-// function displayNewCover(coverInput, titleInput, descriptor1Input, descriptor2Input) {
-//   coverImage.src = coverInput;
-//   coverTitle.innerText = titleInput;
-//   coverDescriptor1.innerText = descriptor1Input;
-//   coverDescriptor2.innerText = descriptor2Input;
-// }
-
 function saveCover() {
   if (!savedCovers.includes(currentCover)) {
     savedCovers.push(currentCover);
