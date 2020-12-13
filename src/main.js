@@ -15,6 +15,7 @@ var currentCover;
 
 window.addEventListener("click", clickHandler);
 window.addEventListener("load", displayCover);
+window.addEventListener("dblclick", deleteCover);
 
 // ~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -135,7 +136,7 @@ function showSavedCovers() {
   savedCoversSection.innerHTML = '';
   for (var i = 0; i < savedCovers.length; i++) {
     savedCoversSection.innerHTML += `
-    <article class="mini-cover">
+    <article class="mini-cover" id=${savedCovers[i].id}>
       <img class="cover-image" src=${savedCovers[i].cover}>
       <h2 class="cover-title">${savedCovers[i].title}</h2>
       <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
@@ -143,3 +144,14 @@ function showSavedCovers() {
     `
   }
 }
+
+function deleteCover(event) {
+  // for (var i = 0; i < savedCovers.length; i++) {
+  //   console.log(savedCovers[i].id)
+  // }
+  //iterate through my array of saved covers and find which one has this id
+  //if the id === then ise splice at that location
+  //else do nothing
+  console.log(event.target.closest("article").id)
+}
+//querySelector?   event.Target.closest("article > img").id
