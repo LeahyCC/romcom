@@ -146,12 +146,15 @@ function showSavedCovers() {
 }
 
 function deleteCover(event) {
-  // for (var i = 0; i < savedCovers.length; i++) {
-  //   console.log(savedCovers[i].id)
-  // }
+  var parentID = event.target.closest("article").id
+  for (var i = 0; i < savedCovers.length; i++) {
+      if (savedCovers[i].id === +parentID) {
+        savedCovers.splice([i], 1)
+      }
+  }
   //iterate through my array of saved covers and find which one has this id
   //if the id === then ise splice at that location
   //else do nothing
-  console.log(event.target.closest("article").id)
+  // console.log(event.target.closest("article").id)
 }
 //querySelector?   event.Target.closest("article > img").id
