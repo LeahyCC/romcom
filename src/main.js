@@ -39,7 +39,7 @@ function displayNewCover(cover, title, descriptor1, descriptor2) {
   coverDescriptor2.innerText = descriptor2;
 }
 
-function displayRandomCover(coverImage, coverTitle, coverDescriptor1, coverDescriptor2) {
+function displayRandomCover() {
   generateRandomCover();
   displayNewCover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2)
 }
